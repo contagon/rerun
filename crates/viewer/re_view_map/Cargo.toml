@@ -19,19 +19,19 @@ workspace = true
 all-features = true
 
 [dependencies]
-re_data_ui.workspace = true
-re_entity_db.workspace = true
-re_log.workspace = true
-re_log_types.workspace = true
-macaw.workspace = true
-re_query.workspace = true
-re_renderer.workspace = true
-re_view.workspace = true
-re_tracing.workspace = true
-re_types.workspace = true
-re_ui.workspace = true
-re_viewer_context.workspace = true
-re_viewport_blueprint.workspace = true
+re_data_ui = "0.26.2"
+re_entity_db = "0.26.2"
+re_log = "0.26.2"
+re_log_types = "0.26.2"
+macaw = "0.26.2"
+re_query = "0.26.2"
+re_renderer = "0.26.2"
+re_view = "0.26.2"
+re_tracing = "0.26.2"
+re_types = "0.26.2"
+re_ui = "0.26.2"
+re_viewer_context = "0.26.2"
+re_viewport_blueprint = "0.26.2"
 
 bytemuck.workspace = true
 egui.workspace = true
