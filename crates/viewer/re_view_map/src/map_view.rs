@@ -28,15 +28,15 @@ use crate::map_overlays;
 use crate::visualizers::{GeoLineStringsVisualizer, GeoPointsVisualizer, update_span};
 
 pub struct MapViewState {
-    tiles: Option<HttpTiles>,
-    map_memory: MapMemory,
-    selected_provider: MapProvider,
+    pub tiles: Option<HttpTiles>,
+    pub map_memory: MapMemory,
+    pub selected_provider: MapProvider,
 
-    last_center_position: walkers::Position,
+    pub last_center_position: walkers::Position,
 
     /// Because `re_renderer` can have varying, multiple frames of delay, we must keep track of the
     /// last picked results for when picking results is not available on a given frame.
-    last_gpu_picking_result: Option<InstancePathHash>,
+    pub last_gpu_picking_result: Option<InstancePathHash>,
 }
 
 impl Default for MapViewState {

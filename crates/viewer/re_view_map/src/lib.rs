@@ -7,3 +7,4 @@ mod map_view;
 mod visualizers;
 
 pub use map_view::MapView;
+pub use map_view::MapViewState;
