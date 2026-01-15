@@ -23,7 +23,6 @@ re_data_ui = "0.26.2"
 re_entity_db = "0.26.2"
 re_log = "0.26.2"
 re_log_types = "0.26.2"
-macaw = "0.26.2"
 re_query = "0.26.2"
 re_renderer = "0.26.2"
 re_view = "0.26.2"
@@ -33,6 +32,7 @@ re_ui = "0.26.2"
 re_viewer_context = "0.26.2"
 re_viewport_blueprint = "0.26.2"
 
+macaw.workspace = true
 bytemuck.workspace = true
 egui.workspace = true
 glam.workspace = true
