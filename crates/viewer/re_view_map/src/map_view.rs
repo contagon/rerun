@@ -196,13 +196,13 @@ impl ViewClass for MapView {
         query: &ViewQuery<'_>,
         system_output: SystemExecutionOutput,
     ) -> Result<(), ViewSystemExecutionError> {
-        self.ui_wrapper(ctx, ui, state, query, system_output)?;
+        self.ui_impl(ctx, ui, state, query, system_output)?;
         Ok(())
     }
 }
 
 impl MapView {
-    fn ui_wrapper(
+    pub fn ui_impl(
         &self,
         ctx: &ViewerContext<'_>,
         ui: &mut egui::Ui,
