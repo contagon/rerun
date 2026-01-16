@@ -196,6 +196,20 @@ impl ViewClass for MapView {
         query: &ViewQuery<'_>,
         system_output: SystemExecutionOutput,
     ) -> Result<(), ViewSystemExecutionError> {
+        self.ui_wrapper(ctx, ui, state, query, system_output)?;
+        Ok(())
+    }
+}
+
+impl MapView {
+    fn ui_wrapper(
+        &self,
+        ctx: &ViewerContext<'_>,
+        ui: &mut egui::Ui,
+        state: &mut dyn ViewState,
+        query: &ViewQuery<'_>,
+        system_output: SystemExecutionOutput,
+    ) -> Result<egui::Response, ViewSystemExecutionError> {
         let state = state.downcast_mut::<MapViewState>()?;
         let map_background = ViewProperty::from_archetype::<MapBackground>(
             ctx.blueprint_db(),
@@ -318,7 +332,7 @@ impl ViewClass for MapView {
             ui.ctx(),
             query,
             state,
-            map_response,
+            map_response.clone(),
             map_rect,
         );
 
@@ -355,7 +369,7 @@ impl ViewClass for MapView {
 
         map_overlays::acknowledgement_overlay(ui, &map_rect, &attribution);
 
-        Ok(())
+        Ok(map_response)
     }
 }
 
