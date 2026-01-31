@@ -22,15 +22,15 @@ use crate::map_overlays;
 use crate::visualizers::{GeoLineStringsVisualizer, GeoPointsVisualizer, update_span};
 
 pub struct MapViewState {
-    tiles: Option<HttpTiles>,
-    map_memory: MapMemory,
-    selected_provider: MapProvider,
+    pub tiles: Option<HttpTiles>,
+    pub map_memory: MapMemory,
+    pub selected_provider: MapProvider,
 
-    last_center_position: walkers::Position,
+    pub last_center_position: walkers::Position,
 
     /// Because `re_renderer` can have varying, multiple frames of delay, we must keep track of the
     /// last picked results for when picking results is not available on a given frame.
-    last_gpu_picking_result: Option<InstancePathHash>,
+    pub last_gpu_picking_result: Option<InstancePathHash>,
 }
 
 impl Default for MapViewState {
@@ -190,6 +190,20 @@ impl ViewClass for MapView {
         query: &ViewQuery<'_>,
         system_output: SystemExecutionOutput,
     ) -> Result<(), ViewSystemExecutionError> {
+        self.ui_impl(ctx, ui, state, query, system_output)?;
+        Ok(())
+    }
+}
+
+impl MapView {
+    pub fn ui_impl(
+        &self,
+        ctx: &ViewerContext<'_>,
+        ui: &mut egui::Ui,
+        state: &mut dyn ViewState,
+        query: &ViewQuery<'_>,
+        system_output: SystemExecutionOutput,
+    ) -> Result<egui::Response, ViewSystemExecutionError> {
         let state = state.downcast_mut::<MapViewState>()?;
         let map_background = ViewProperty::from_archetype::<MapBackground>(
             ctx.blueprint_db(),
@@ -309,7 +323,7 @@ impl ViewClass for MapView {
             ui.ctx(),
             query,
             state,
-            map_response,
+            map_response.clone(),
             map_rect,
         );
 
@@ -341,7 +355,7 @@ impl ViewClass for MapView {
 
         map_overlays::acknowledgement_overlay(ui, &map_rect, &attribution);
 
-        Ok(())
+        Ok(map_response)
     }
 }
 
